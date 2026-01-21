@@ -1,0 +1,718 @@
+{
+     "$id": "http://statnett.no/profile/ExtWindFarm.schema.json",
+     "$schema": "https://json-schema.org/draft/2020-12/schema",
+     "title": "ExtWindFarm",
+     "description": "SN extension for wind farms",
+     "namespace": "http://statnett.no/profile/ExtWindFarm#",
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+         "BatteryUnit": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/BatteryUnit"
+             }
+         },
+         "Facility": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/Facility"
+             }
+         },
+         "FacilityLicense": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/FacilityLicense"
+             }
+         },
+         "Plant": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/Plant"
+             }
+         },
+         "PowerElectronicsConnection": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/PowerElectronicsConnection"
+             },
+             "minItems": 1
+         },
+         "PowerElectronicsWindUnit": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/PowerElectronicsWindUnit"
+             }
+         },
+         "WindGeneratingUnit": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/WindGeneratingUnit"
+             }
+         },
+         "WindPowerPlant": {
+             "type": "array",
+             "items": {
+                 "$ref": "#/$defs/WindPowerPlant"
+             }
+         }
+     },
+     "required": [
+         "PowerElectronicsConnection"
+     ],
+     "$defs": {
+          "BatteryUnit": {
+              "title": "BatteryUnit",
+              "description": "An electrochemical energy storage device. ",
+              "modelReference": "http://www.ucaiug.org/CIM100#BatteryUnit",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  },
+                  "maxP": {
+                      "description": "Maximum active power limit. This is the maximum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.maxP",
+                      "type": "number"
+                  },
+                  "minP": {
+                      "description": "Minimum active power limit. This is the minimum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.minP",
+                      "type": "number"
+                  },
+                  "PowerElectronicsConnection": {
+                      "description": "A power electronics unit has a connection to the AC network.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.PowerElectronicsConnection",
+                      "$ref": "#/$defs/PowerElectronicsConnection"
+                  },
+                  "ratedE": {
+                      "description": "Full energy storage capacity of the battery. The attribute shall be a positive value.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#BatteryUnit.ratedE",
+                      "type": "number"
+                  },
+                  "storedE": {
+                      "description": "Amount of energy currently stored. The attribute shall be a positive value or zero and lower than BatteryUnit.ratedE.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#BatteryUnit.storedE",
+                      "type": "number"
+                  }
+              },
+              "required": [
+                  "PowerElectronicsConnection"
+              ]
+          },
+          "Equipment": {
+              "title": "Equipment",
+              "description": "The parts of a power system that are physical devices, electronic or mechanical.",
+              "modelReference": "http://www.ucaiug.org/CIM100#Equipment",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  }
+              }
+          },
+          "Facility": {
+              "title": "Facility",
+              "description": "A facility may contain buildings, storage facilities, switching facilities, power generation, manufacturing facilities, maintenance facilities, etc.",
+              "modelReference": "http://www.ucaiug.org/CIM100#Facility",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "Equipment": {
+                      "description": "The equipment part of the resource container.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#ResourceContainer.Equipment",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/Equipment"
+                      }
+                  },
+                  "FacilityLicense": {
+                      "description": "",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Facility.FacilityLicense",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/FacilityLicense"
+                      }
+                  },
+                  "ResourceContainer": {
+                      "description": "The resource container for this facility.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Facility.ResourceContainer",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/ResourceContainer"
+                      }
+                  }
+              }
+          },
+          "FacilityLicense": {
+              "title": "FacilityLicense",
+              "description": "",
+              "modelReference": "http://www.ucaiug.org/CIM100#FacilityLicense",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+              }
+          },
+          "GeneratingUnit": {
+              "title": "GeneratingUnit",
+              "description": "A single or set of synchronous machines for converting mechanical power into alternating-current power. For example, individual machines within a set may be defined for scheduling purposes while a single control signal is derived for the set. In this case there would be a GeneratingUnit for each member of the set and an additional GeneratingUnit corresponding to the set.",
+              "modelReference": "http://www.ucaiug.org/CIM100#GeneratingUnit",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  }
+              }
+          },
+          "IdentifiedObject": {
+              "title": "IdentifiedObject",
+              "description": "skos:definition : Anything spatial (being or having a shape, position or an extent). skos:note Subclasses of this class are expected to be used for instance data.",
+              "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  }
+              }
+          },
+          "Plant": {
+              "title": "Plant",
+              "description": "A Plant is a collection of equipment for purposes of generation.",
+              "modelReference": "http://www.ucaiug.org/CIM100#Plant",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "Equipment": {
+                      "description": "The equipment part of the resource container.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#ResourceContainer.Equipment",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/Equipment"
+                      }
+                  }
+              }
+          },
+          "PowerElectronicsConnection": {
+              "title": "PowerElectronicsConnection",
+              "description": "A connection to the AC network for energy production or consumption that uses power electronics rather than rotating machines.",
+              "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  },
+                  "maxIFault": {
+                      "description": "Maximum fault current this device will contribute, in per-unit of rated current, before the converter protection will trip or bypass.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.maxIFault",
+                      "type": "number"
+                  },
+                  "maxQ": {
+                      "description": "Maximum reactive power limit. This is the maximum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.maxQ",
+                      "type": "number"
+                  },
+                  "minQ": {
+                      "description": "Minimum reactive power limit for the unit. This is the minimum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.minQ",
+                      "type": "number"
+                  },
+                  "p": {
+                      "description": "Active power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting value for a steady state solution.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.p",
+                      "type": "number"
+                  },
+                  "q": {
+                      "description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting value for a steady state solution.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.q",
+                      "type": "number"
+                  },
+                  "ratedS": {
+                      "description": "Nameplate apparent power rating for the unit. The attribute shall have a positive value.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.ratedS",
+                      "type": "number"
+                  },
+                  "ratedU": {
+                      "description": "Rated voltage (nameplate data, Ur in IEC 60909-0). It is primarily used for short circuit data exchange according to IEC 60909. The attribute shall be a positive value.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsConnection.ratedU",
+                      "type": "number"
+                  }
+              }
+          },
+          "PowerElectronicsUnit": {
+              "title": "PowerElectronicsUnit",
+              "description": "A generating unit or battery or aggregation that connects to the AC network using power electronics rather than rotating machines.",
+              "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  },
+                  "maxP": {
+                      "description": "Maximum active power limit. This is the maximum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.maxP",
+                      "type": "number"
+                  },
+                  "minP": {
+                      "description": "Minimum active power limit. This is the minimum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.minP",
+                      "type": "number"
+                  },
+                  "PowerElectronicsConnection": {
+                      "description": "A power electronics unit has a connection to the AC network.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.PowerElectronicsConnection",
+                      "$ref": "#/$defs/PowerElectronicsConnection"
+                  }
+              },
+              "required": [
+                  "PowerElectronicsConnection"
+              ]
+          },
+          "PowerElectronicsWindUnit": {
+              "title": "PowerElectronicsWindUnit",
+              "description": "A wind generating unit that connects to the AC network with power electronics rather than rotating machines or an aggregation of such units.",
+              "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsWindUnit",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  },
+                  "maxP": {
+                      "description": "Maximum active power limit. This is the maximum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.maxP",
+                      "type": "number"
+                  },
+                  "minP": {
+                      "description": "Minimum active power limit. This is the minimum (nameplate) limit for the unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.minP",
+                      "type": "number"
+                  },
+                  "PowerElectronicsConnection": {
+                      "description": "A power electronics unit has a connection to the AC network.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#PowerElectronicsUnit.PowerElectronicsConnection",
+                      "$ref": "#/$defs/PowerElectronicsConnection"
+                  }
+              },
+              "required": [
+                  "PowerElectronicsConnection"
+              ]
+          },
+          "PowerSystemResource": {
+              "title": "PowerSystemResource",
+              "description": "Definition: A discrete spatial phenomenon in a universe of discourse. Note: A Feature represents a uniquely identifiable phenomenon, for example a river or an apple. While such phenomena (and therefore the Features used to represent them) are bounded, their boundaries may be crisp (e.g., the declared boundaries of a state), vague (e.g., the delineation of a valley versus its neighboring mountains), and change with time (e.g., a storm front). While discrete in nature, Features may be created from continuous observations, such as an isochrone that determines the region that can be reached by ambulance within 5 minutes.",
+              "modelReference": "http://www.ucaiug.org/CIM100#PowerSystemResource",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  }
+              }
+          },
+          "RegulatingCondEq": {
+              "title": "RegulatingCondEq",
+              "description": "A type of conducting equipment that can regulate a quantity (i.e. voltage or flow) at a specific point in the network.",
+              "modelReference": "http://www.ucaiug.org/CIM100#RegulatingCondEq",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  }
+              }
+          },
+          "ResourceContainer": {
+              "title": "ResourceContainer",
+              "description": "Containment of resources that collectively provide a system function and are subject to measurement, scheduling and operable within defined limits.",
+              "modelReference": "http://www.ucaiug.org/CIM100#ResourceContainer",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "Equipment": {
+                      "description": "The equipment part of the resource container.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#ResourceContainer.Equipment",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/Equipment"
+                      }
+                  }
+              }
+          },
+          "WindGenUnitKind": {
+              "title": "WindGenUnitKind",
+              "description": "Kind of wind generating unit.",
+              "modelReference": "http://www.ucaiug.org/CIM100#WindGenUnitKind",
+              "type": "string",
+              "enum": [
+                  "offshore",
+                  "onshore"
+              ]
+          },
+          "WindGeneratingUnit": {
+              "title": "WindGeneratingUnit",
+              "description": "A wind driven generating unit, connected to the grid by means of a rotating machine. May be used to represent a single turbine or an aggregation.",
+              "modelReference": "http://www.ucaiug.org/CIM100#WindGeneratingUnit",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "aggregate": {
+                      "description": "The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is applicable in cases when the dedicated classes for equivalent equipment do not have all of the attributes necessary to represent the required level of detail. In case the flag is set to “true” the single instance of equipment represents multiple pieces of equipment that have been modelled together as an aggregate equivalent obtained by a network reduction procedure. Examples would be power transformers or synchronous machines operating in parallel modelled as a single aggregate power transformer or aggregate synchronous machine. The attribute is not used for EquivalentBranch, EquivalentShunt and EquivalentInjection.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.aggregate",
+                      "type": "boolean"
+                  },
+                  "inService": {
+                      "description": "Specifies the availability of the equipment. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.inService",
+                      "type": "boolean"
+                  },
+                  "networkAnalysisEnabled": {
+                      "description": "The equipment is enabled to participate in network analysis. If unspecified, the value is assumed to be true.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.networkAnalysisEnabled",
+                      "type": "boolean"
+                  },
+                  "normallyInService": {
+                      "description": "Specifies the availability of the equipment under normal operating conditions. True means the equipment is available for topology processing, which determines if the equipment is energized or not. False means that the equipment is treated by network applications as if it is not in the model.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.normallyInService",
+                      "type": "boolean"
+                  },
+                  "AggregatedEquipment": {
+                      "description": "An aggregated representation of the detailed equipment.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Equipment.AggregatedEquipment",
+                      "$ref": "#/$defs/Equipment"
+                  },
+                  "windGenUnitType": {
+                      "description": "The kind of wind generating unit.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#WindGeneratingUnit.windGenUnitType",
+                      "$ref": "#/$defs/WindGenUnitKind"
+                  }
+              }
+          },
+          "WindPowerPlant": {
+              "title": "WindPowerPlant",
+              "description": "Wind power plant.",
+              "modelReference": "http://www.ucaiug.org/CIM100#WindPowerPlant",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "mRID": {
+                      "description": "Master resource identifier issued by a model authority. The mRID is unique within an exchange context. Global uniqueness is easily achieved by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended. For CIMXML data files in RDF syntax conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.mRID",
+                      "type": "string"
+                  },
+                  "name": {
+                      "description": "The name is any free human readable and possibly non unique text naming the object.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#IdentifiedObject.name",
+                      "type": "string"
+                  },
+                  "Equipment": {
+                      "description": "The equipment part of the resource container.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#ResourceContainer.Equipment",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/Equipment"
+                      }
+                  },
+                  "numberOfWindTurbine": {
+                      "description": "",
+                      "modelReference": "http://www.ucaiug.org/CIM100#WindPowerPlant.numberOfWindTurbine",
+                      "type": "integer"
+                  },
+                  "WindGeneratingUnits": {
+                      "description": "A wind generating unit or units may be a member of a wind power plant.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#WindPowerPlant.WindGeneratingUnits",
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/$defs/WindGeneratingUnit"
+                      }
+                  }
+              }
+          },
+          "ExtWindFarm": {
+               "$ref": "#"
+          }
+     }
+}
