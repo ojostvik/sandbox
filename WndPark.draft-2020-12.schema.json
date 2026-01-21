@@ -1,9 +1,9 @@
 {
-     "$id": "http://statnett.no/profile/ExtWindFarm.schema.json",
+     "$id": "http://foo.no/profile/ExtWindFarm.schema.json",
      "$schema": "https://json-schema.org/draft/2020-12/schema",
      "title": "ExtWindFarm",
      "description": "SN extension for wind farms",
-     "namespace": "http://statnett.no/profile/ExtWindFarm#",
+     "namespace": "http://foo.no/profile/ExtWindFarm#",
      "type": "object",
      "additionalProperties": false,
      "properties": {
