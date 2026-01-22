@@ -1,9 +1,9 @@
 {
-     "$id": "http://foo.no/profile/ExtWindFarm.schema.json",
+     "$id": "http://statnett.no/profile/ExtWindFarm.schema.json",
      "$schema": "https://json-schema.org/draft/2020-12/schema",
      "title": "ExtWindFarm",
      "description": "SN extension for wind farms",
-     "namespace": "http://foo.no/profile/ExtWindFarm#",
+     "namespace": "http://statnett.no/profile/ExtWindFarm#",
      "type": "object",
      "additionalProperties": false,
      "properties": {
@@ -202,6 +202,11 @@
                           "$ref": "#/$defs/Equipment"
                       }
                   },
+                  "kind": {
+                      "description": "Kind of this facility.",
+                      "modelReference": "http://www.ucaiug.org/CIM100#Facility.kind",
+                      "type": "string"
+                  },
                   "FacilityLicense": {
                       "description": "",
                       "modelReference": "http://www.ucaiug.org/CIM100#Facility.FacilityLicense",
@@ -219,6 +224,32 @@
                       }
                   }
               }
+          },
+          "FacilityKind": {
+              "title": "FacilityKind",
+              "description": "Types of facilities at which an asset can be deployed.",
+              "modelReference": "http://www.ucaiug.org/CIM100#FacilityKind",
+              "type": "string",
+              "enum": [
+                  "batteryStorageSite",
+                  "distributionPoleTop",
+                  "gasThermalProductionSite",
+                  "hydroProductionSite",
+                  "industrialDemandSite",
+                  "marineProductionSite",
+                  "nuclearProductionSite",
+                  "premisesClusterDemandSite",
+                  "pumpedHydroStorageSite",
+                  "solarProductionSite",
+                  "substationDistribution",
+                  "substationFossilPlant",
+                  "substationHydroPlant",
+                  "substationNuclearPlant",
+                  "substationSubTransmission",
+                  "substationTransmission",
+                  "transmissionSite",
+                  "windProductionSite"
+              ]
           },
           "FacilityLicense": {
               "title": "FacilityLicense",
